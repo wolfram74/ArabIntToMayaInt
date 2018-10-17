@@ -1,5 +1,7 @@
 var ArabIntToMayanInt = (function(){
   var API = {}
+  var svgNS = 'http://www.w3.org/2000/svg'
+  var glyphSize = 100
   API.toString = function(number){
     var power = 1
     if(number===0){return 'o'}
@@ -27,7 +29,6 @@ var ArabIntToMayanInt = (function(){
     // markings occupy 2/3 of a row
     // bar x is 5%
     // bar y would be .25/6 + y
-    var svgNS = 'http://www.w3.org/2000/svg'
     // document.createElementNS(, 'circle')
     var terms = mayStr.split('')
     console.log(terms)
@@ -38,8 +39,8 @@ var ArabIntToMayanInt = (function(){
     var barWidth = '90%'
     var barHeight = '15.6%'
     var dotRad = 7.8
-    glyph.setAttribute('height', '100')
-    glyph.setAttribute('width', '100')
+    glyph.setAttribute('height', glyphSize)
+    glyph.setAttribute('width', glyphSize)
     var background = document.createElementNS(svgNS, 'rect')
     background.setAttribute('x', '1%')
     background.setAttribute('y', '1%')
@@ -81,7 +82,31 @@ var ArabIntToMayanInt = (function(){
   API.toVGlyph = function(number){
     var stringVal = API.toString(number)
     var stringArray = stringVal.split(',')
-    return
+    console.log(stringArray)
+    var vertGlyph = document.createElementNS(svgNS,'svg')
+    vertGlyph.setAttribute('width', glyphSize)
+    vertGlyph.setAttribute('height', glyphSize*stringArray.length)
+    for(var index = 0; index < stringArray.length; index++){
+      var glyph = API.makeGlyph(stringArray[index])
+      glyph.setAttribute('y', glyphSize*index)
+      vertGlyph.append(glyph)
+    }
+    return vertGlyph
+  }
+
+  API.toHGlyph = function(number){
+    var stringVal = API.toString(number)
+    var stringArray = stringVal.split(',')
+    console.log(stringArray)
+    var horizontalGlyph = document.createElementNS(svgNS,'svg')
+    horizontalGlyph.setAttribute('width', glyphSize*stringArray.length)
+    horizontalGlyph.setAttribute('height', glyphSize)
+    for(var index = 0; index < stringArray.length; index++){
+      var glyph = API.makeGlyph(stringArray[index])
+      glyph.setAttribute('x', glyphSize*index)
+      horizontalGlyph.append(glyph)
+    }
+    return horizontalGlyph
   }
   return API
 })()

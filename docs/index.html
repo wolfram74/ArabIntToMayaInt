@@ -4,13 +4,43 @@
 </head>
 <body>
   <div class='glyph-home'>
+  <input type ='number' name='arabNumeral'>
+  <p>
+    The result of #toString
+    <br>
+    <span id='string'></span>
+  </p>
+  <p>
+
+    The result of #toHGlyph
+    <br>
+    <span id='HGlyph'></span>
+  </p>
+  <p>
+    The result of #toHGlyph
+    <br>
+    <span id='VGlyph'></span>
+  </p>
   </div>
 
 
 </body>
   <script src="../scripts/ArabIntToMayanInt.js"></script>
   <script type="text/javascript">
-    var bodyElement = document.querySelector('.glyph-home')
-    bodyElement.append(ArabIntToMayanInt.makeGlyph('dddbbb'))
+    var numberField = document.querySelector('input')
+    numberField.addEventListener('change', exampleRun)
+    // var bodyElement = document.querySelector('.glyph-home')
+    // bodyElement.append(ArabIntToMayanInt.toHGlyph(1202))
+    function exampleRun(event){
+      var demoNum = event.target.value
+      var str = ArabIntToMayanInt.toString(demoNum)
+      var Vglyph = ArabIntToMayanInt.toVGlyph(demoNum)
+      var Hglyph = ArabIntToMayanInt.toHGlyph(demoNum)
+      document.querySelector('#string').innerHTML = str
+      document.querySelector('#Hglyph').innerHTML = ''
+      document.querySelector('#Hglyph').append(Hglyph)
+      document.querySelector('#Vglyph').innerHTML = ''
+      document.querySelector('#Vglyph').append(Vglyph)
+    }
   </script>
 </html>
