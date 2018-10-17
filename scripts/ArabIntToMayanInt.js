@@ -21,5 +21,9 @@ var ArabIntToMayanInt = (function(){
 
     return output.slice(1)
   }
+
+  API.makeGlyph = function(mayStr){
+    var glyph = document.createElement('svg')
+  }
   return API
 })()
