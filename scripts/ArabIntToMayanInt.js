@@ -23,7 +23,18 @@ var ArabIntToMayanInt = (function(){
   }
 
   API.makeGlyph = function(mayStr){
-    var glyph = document.createElement('svg')
+    var svgNS = 'http://www.w3.org/2000/svg'
+    // document.createElementNS(, 'circle')
+    var glyph = document.createElementNS(svgNS,'svg')
+    glyph.setAttribute('height', '100')
+    glyph.setAttribute('width', '100')
+    var circle = document.createElementNS(svgNS,'circle')
+    circle.setAttribute('cx',50)
+    circle.setAttribute('cy',50)
+    circle.setAttribute('r',25)
+    circle.setAttribute('fill','black')
+    glyph.append(circle)
+    return glyph
   }
   return API
 })()

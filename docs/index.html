@@ -3,11 +3,14 @@
   <title>Example of the Arabic Numeral to Mayan Numeral converter</title>
 </head>
 <body>
+  <div class='glyph-home'>
+  </div>
+
 
 </body>
   <script src="../scripts/ArabIntToMayanInt.js"></script>
   <script type="text/javascript">
-    var body_element = document.querySelector('body')
-    ArabIntToMayanInt
+    var bodyElement = document.querySelector('.glyph-home')
+    bodyElement.append(ArabIntToMayanInt.makeGlyph('ddbb'))
   </script>
 </html>
