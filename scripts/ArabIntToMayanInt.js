@@ -23,18 +23,65 @@ var ArabIntToMayanInt = (function(){
   }
 
   API.makeGlyph = function(mayStr){
+    // each row is 25%
+    // markings occupy 2/3 of a row
+    // bar x is 5%
+    // bar y would be .25/6 + y
     var svgNS = 'http://www.w3.org/2000/svg'
     // document.createElementNS(, 'circle')
+    var terms = mayStr.split('')
+    console.log(terms)
+    var index = terms.length-1
+    var row = 0
+    var col = 0
     var glyph = document.createElementNS(svgNS,'svg')
+    var barWidth = '90%'
+    var barHeight = '15.6%'
+    var dotRad = 7.8
     glyph.setAttribute('height', '100')
     glyph.setAttribute('width', '100')
-    var circle = document.createElementNS(svgNS,'circle')
-    circle.setAttribute('cx',50)
-    circle.setAttribute('cy',50)
-    circle.setAttribute('r',25)
-    circle.setAttribute('fill','black')
-    glyph.append(circle)
+    var background = document.createElementNS(svgNS, 'rect')
+    background.setAttribute('x', '1%')
+    background.setAttribute('y', '1%')
+    background.setAttribute('rx', '10%')
+    background.setAttribute('ry', '10%')
+    background.setAttribute('width', '98%')
+    background.setAttribute('height', '98%')
+    background.setAttribute('fill', 'gray')
+    glyph.append(background)
+    while(index >=0){
+      var type = terms[index]
+      var yTop = 2+(3-row)*24
+      console.log(yTop)
+      if(type =='b'){
+        col = 0
+        var el = document.createElementNS(svgNS, 'rect')
+        el.setAttribute('x', '5%')
+        el.setAttribute('y', `${yTop+25/6}%`)
+        el.setAttribute('width', barWidth)
+        el.setAttribute('height', barHeight)
+        el.setAttribute('rx', '10%')
+        el.setAttribute('ry', '50%')
+        row += 1
+      }
+      if(type =='d'){
+        var el = document.createElementNS(svgNS, 'circle')
+        var dotRoom = (98)/4
+        el.setAttribute('cx', `${5+dotRad+col*dotRoom}%`)
+        el.setAttribute('cy', `${yTop+25/2}%`)
+        el.setAttribute('r', `${dotRad}%`)
+        col+=1
+      }
+      glyph.append(el)
+      index -= 1
+    }
     return glyph
+  }
+
+  API.toVGlyph = function(number){
+    var stringVal = API.toString(number)
+    var stringArray = stringVal.split(',')
+    return
   }
   return API
 })()
