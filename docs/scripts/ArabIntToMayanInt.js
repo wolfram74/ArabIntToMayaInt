@@ -1,7 +1,7 @@
 var ArabIntToMayanInt = (function(){
   var API = {}
   var svgNS = 'http://www.w3.org/2000/svg'
-  var glyphSize = 100
+  var glyphSize = 100 // everything relative to that, auto-scales
   API.toString = function(number){
     var power = 1
     if(number===0){return 'o'}
@@ -72,6 +72,9 @@ var ArabIntToMayanInt = (function(){
         el.setAttribute('cy', `${yTop+25/2}%`)
         el.setAttribute('r', `${dotRad}%`)
         col+=1
+      }
+      if(type == 'o'){
+
       }
       glyph.append(el)
       index -= 1
