@@ -1,0 +1,81 @@
+<html>
+<head>
+  <title>CountUp and CountDown</title>
+</head>
+<body>
+  <div class='timers'>
+    <div class='countup_div'>
+      <h3> Since the last time Apocolypse</h3>
+      <span id='last_days'></span>
+      <span id='last_minutes'></span>
+      <span id='last_seconds'></span>
+    </div>
+    <div class='countdown_div'>
+      <h3> Until the next time Apocolypse</h3>
+      <span id='next_days'></span>
+      <span id='next_minutes'></span>
+      <span id='next_seconds'></span>
+    </div>
+  </div>
+
+
+</body>
+
+<script src="scripts/ArabIntToMayanInt.js"></script>
+<script type="text/javascript">
+// yyyy/mm/dd/hh/mm/ss
+// last 2000/01/01/00/00/00
+var lastApoc = new Date( 2000, 0, 1,0,0,0)
+// next 2038/01/19/03/14/08
+var nextApoc = new Date( 2038, 0, 19,03,14,08)
+
+function secondsDelta (date){
+  var now = new Date()
+  return Math.abs(Math.floor((now-date)/1000))
+}
+
+function secondsToDMS(seconds){
+  var out =[0,0,0]
+  out[2] = seconds%60
+  seconds -= out[2]
+  seconds /= 60
+  out[1] = seconds%1440
+  seconds -= out[1]
+  seconds /= 1440
+  out[0]= seconds
+  return out
+}
+
+function setGlyphs(){
+  var lastVals = secondsToDMS(secondsDelta(lastApoc))
+  lastVals = lastVals.map(num => ArabIntToMayanInt.toVGlyph(num))
+  var ld = document.getElementById('last_days')
+  ld.innerHTML= ''
+  ld.append(lastVals[0])
+  var lm = document.getElementById('last_minutes')
+  lm.innerHTML= ''
+  lm.append(lastVals[1])
+  var ls = document.getElementById('last_seconds')
+  ls.innerHTML= ''
+  ls.append(lastVals[2])
+  var nextVals = secondsToDMS(secondsDelta(nextApoc))
+  nextVals = nextVals.map(num => ArabIntToMayanInt.toVGlyph(num))
+  var nd = document.getElementById('next_days')
+  nd.innerHTML= ''
+  nd.append(nextVals[0])
+  var nm = document.getElementById('next_minutes')
+  nm.innerHTML= ''
+  nm.append(nextVals[1])
+  var ns = document.getElementById('next_seconds')
+  ns.innerHTML= ''
+  ns.append(nextVals[2])
+}
+
+setInterval(setGlyphs, 750)
+
+</script>
+
+<style type="text/css">
+
+</style>
+</html>

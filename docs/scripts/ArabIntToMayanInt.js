@@ -31,7 +31,7 @@ var ArabIntToMayanInt = (function(){
     // bar y would be .25/6 + y
     // document.createElementNS(, 'circle')
     var terms = mayStr.split('')
-    console.log(terms)
+    // console.log(terms)
     var index = terms.length-1
     var row = 0
     var col = 0
@@ -53,7 +53,7 @@ var ArabIntToMayanInt = (function(){
     while(index >=0){
       var type = terms[index]
       var yTop = 2+(3-row)*24
-      console.log(yTop)
+      // console.log(yTop)
       if(type =='b'){
         col = 0
         var el = document.createElementNS(svgNS, 'rect')
@@ -82,7 +82,7 @@ var ArabIntToMayanInt = (function(){
   API.toVGlyph = function(number){
     var stringVal = API.toString(number)
     var stringArray = stringVal.split(',')
-    console.log(stringArray)
+    // console.log(stringArray)
     var vertGlyph = document.createElementNS(svgNS,'svg')
     vertGlyph.setAttribute('width', glyphSize)
     vertGlyph.setAttribute('height', glyphSize*stringArray.length)
@@ -97,7 +97,7 @@ var ArabIntToMayanInt = (function(){
   API.toHGlyph = function(number){
     var stringVal = API.toString(number)
     var stringArray = stringVal.split(',')
-    console.log(stringArray)
+    // console.log(stringArray)
     var horizontalGlyph = document.createElementNS(svgNS,'svg')
     horizontalGlyph.setAttribute('width', glyphSize*stringArray.length)
     horizontalGlyph.setAttribute('height', glyphSize)
