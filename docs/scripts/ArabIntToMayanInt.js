@@ -74,7 +74,12 @@ var ArabIntToMayanInt = (function(){
         col+=1
       }
       if(type == 'o'){
-
+        var el = document.createElementNS(svgNS, 'ellipse')
+        var dotRoom = (98)/4
+        el.setAttribute('cx', '50%')
+        el.setAttribute('cy', '50%')
+        el.setAttribute('rx', glyphSize/2.5)
+        el.setAttribute('ry', glyphSize/6)
       }
       glyph.append(el)
       index -= 1
